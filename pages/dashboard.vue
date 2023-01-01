@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     getProducts(){
-      this.$api.products.getAllProducts().then(response => {
-        this.products = response.data.products[0]
+      this.$api.products.getAllProductsFromDB().then(response => {
+        this.products = response.data
       }).catch(error => {
         console.error(error)
       })

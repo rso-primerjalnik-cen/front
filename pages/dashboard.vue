@@ -1,10 +1,5 @@
 <template>
   <div>
-<!--    <b-row>-->
-<!--      <b-col>-->
-<!--        <h2>Dashboard</h2>-->
-<!--      </b-col>-->
-<!--    </b-row>-->
     <b-input-group class="mt-3">
       <template #prepend>
         <b-input-group-text>
@@ -42,24 +37,6 @@
              ref="tableData"
              :fields="fields"
              show-empty>
-      <template #table-busy>
-        <div class="text-center my-2">
-          <b-spinner class="align-middle mr-2" small></b-spinner>
-          <strong>{{ $t('common.loading') }}</strong>
-        </div>
-      </template>
-<!--      <template #cell(amount)="data">-->
-<!--        <b-badge :variant="data.item.amount > 0 ? 'success' : 'danger'">{{ data.item.amount }}</b-badge>-->
-<!--      </template>-->
-<!--      <template #cell(status)="data">-->
-<!--        <b-badge :variant="data.item.status === 'CLOSED' ? 'success' : data.item.status === 'PENDING' ? 'warning' : 'danger'">{{ data.item.status }}</b-badge>-->
-<!--      </template>-->
-<!--      <template #cell(timestamp)="data">-->
-<!--        <div>{{ data.item.created_at | formatUnixTimestamp }}</div>-->
-<!--      </template>-->
-<!--      <template #cell(balance)="data">-->
-<!--        <div>{{ data.item.balance | formatFiatPrice(data.item.currency) }}</div>-->
-<!--      </template>-->
     </b-table>
   </div>
 </template>
@@ -75,10 +52,10 @@ export default {
       favoriteProducts: {},
       fields: [
         {key: 'trgovina', label: "Trgovina"},
-        {key: 'redna_cena_na_kos', label: "Redna Cena"},
+        {key: 'redna_cena_na_kos', label: "Redna Cena", sortable: true},
         {key: 'kategorija', label: "Kategorija"},
         {key: 'drzava_dolgo_ime', label: "Država"},
-        {key: 'date', label: "Datum"},
+        {key: 'date', label: "Datum", sortable: true},
       ]
     }
   },
@@ -106,11 +83,14 @@ export default {
     },
     toggleFavorite(){
       if (this.favoriteProducts.product_uuids.includes(this.selectedProduct.uuid)){
-        this.favoriteProducts.product_uuids.filter(uuid => uuid !== this.selectedProduct.uuid)
+        this.favoriteProducts.product_uuids =
+          this.favoriteProducts.product_uuids.filter(uuid => uuid !== this.selectedProduct.uuid)
       } else {
         this.favoriteProducts.product_uuids.push(this.selectedProduct.uuid)
       }
-      this.$api.products.storeUserFavorites(this.$auth.user.sub, {product_uuids: this.favoriteProducts.product_uuids}).then(response => {
+
+      this.$api.products.storeUserFavorites(this.$auth.user.sub,
+        {product_uuids: this.favoriteProducts.product_uuids}).then(response => {
         this.favoriteProducts = response.data
       }).catch(error => {
         console.error(error)
@@ -120,7 +100,6 @@ export default {
   mounted() {
     this.getProducts()
     this.getFavoriteProducts()
-    // this.getProductPrices()
   }
 }
 </script>

@@ -50,12 +50,6 @@
                    :busy="!allUsers"
                    :fields="allUsersFields"
                    show-empty>
-            <template #table-busy>
-              <div class="text-center my-2">
-                <b-spinner class="align-middle mr-2" small></b-spinner>
-                <strong>Loading...</strong>
-              </div>
-            </template>
           </b-table>
         </b-card>
       </b-col>

@@ -25,6 +25,4 @@ export default ({ $axios, store }, inject) => {
 
     return tcText + clamp;
   });
-
-
 }

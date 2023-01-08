@@ -21,11 +21,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    'vue-multiselect/dist/vue-multiselect.min.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/components.js' },
+    { src: '~/plugins/components.js' },
     { src: '@/plugins/api.js' }
   ],
 
@@ -45,8 +46,19 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
     '@nuxtjs/toast'
-
   ],
+
+  bootstrapVue: {
+    components: ['BContainer', 'BRow', 'BCol', 'BInputGroup', 'BButton', 'BInputGroupText',
+      'BCard', 'BIcon', 'BTable', 'BPagination', 'BCollapse', 'BFormCheckboxGroup',
+      'BFormInput', 'BFormTextarea', 'BForm', 'BFormGroup', 'BNavbarBrand', 'BImg',
+      'BNavbar', 'BNavbarNav', 'BFormCheckbox', 'BIconPersonCircle', 'BIconX',
+      'BIconSearch', 'BIconFunnel', 'BIconChevronDown','BIconChevronRight',
+      'BIconXCircle', 'BIconChevronUp', 'BIconStarFill', 'BIconHeart', 'BIconHeartFill', 'BIconLock', 'BNavbarNav', 'BNavbarToggle',
+      'BNavItemDropdown', 'BDropdownItem', 'BInputGroupAppend'
+    ],
+    directivePlugins: ['VBTooltipPlugin', 'VBTogglePlugin']
+  },
 
   toast: {
     position: 'top-right',
